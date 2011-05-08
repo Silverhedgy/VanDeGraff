@@ -1,0 +1,4 @@
+name: VanDeGraff
+main: com.cognificent.vandegraff.VanDeGraffPlugin
+author: cognificent@gmail.com
+version: 0.0.1
