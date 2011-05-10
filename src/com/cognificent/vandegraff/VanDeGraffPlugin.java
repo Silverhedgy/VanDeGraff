@@ -16,14 +16,13 @@ public class VanDeGraffPlugin extends JavaPlugin{
 	File file = new File(mainDirectory + File.separator + "config.yml");
 	
 	private final VanDeGraffBlockListener blockListener = new VanDeGraffBlockListener(this);
-	private final VanDeGraffPlayerListener playerListener = new VanDeGraffPlayerListener(this);
 	private final VanDeGraffVehicleListener vehicleListener = new VanDeGraffVehicleListener(this);
 	private final VanDeGraffEntityListener entityListener = new VanDeGraffEntityListener(this);
 	
 
 	@Override
 	public void onDisable() {
-		log.info("VanDeGraff disabled.");
+		log.info("ThunderArrow disabled.");
 	}
 
 	@Override

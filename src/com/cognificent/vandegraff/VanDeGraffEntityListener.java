@@ -17,13 +17,11 @@ public class VanDeGraffEntityListener extends EntityListener{
 		if(event.getCause() == DamageCause.LIGHTNING) {
 			if(event.getEntity() instanceof Minecart) {
 				event.setCancelled(true);
-				plugin.log.info("Minecarts are immune to static.");
 			}
 			
 			if (event.getEntity() instanceof LivingEntity
 					&& ((LivingEntity)event.getEntity()).isInsideVehicle()) {
 				event.setCancelled(true);
-				plugin.log.info("Faraday Cage Activated.");
 			}
 		}
 	}
