@@ -8,22 +8,27 @@ import org.bukkit.event.entity.EntityListener;
 
 public class VanDeGraffEntityListener extends EntityListener{
 	private final VanDeGraffPlugin plugin;
-	
+
 	public VanDeGraffEntityListener(final VanDeGraffPlugin plugin) {
 		this.plugin = plugin;
 	}
 	
 	public void onEntityDamage(EntityDamageEvent event) {
 		if(event.getCause() == DamageCause.LIGHTNING) {
-			if(event.getEntity() instanceof Minecart) {
-				event.setCancelled(true);
+			if(plugin.config.getBoolean("lightning.carts", false)) {
+				
+				if(event.getEntity() instanceof Minecart) {
+					event.setCancelled(true);
+				}
+				
+				if (event.getEntity() instanceof LivingEntity
+						&& ((LivingEntity)event.getEntity()).isInsideVehicle()) {
+					event.setCancelled(true);
+				}
 			}
 			
-			if (event.getEntity() instanceof LivingEntity
-					&& ((LivingEntity)event.getEntity()).isInsideVehicle()) {
-				event.setCancelled(true);
-			}
+			event.setDamage(plugin.config.getInt("lightning.damage", 5));
 		}
 	}
-
 }
+

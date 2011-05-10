@@ -14,16 +14,18 @@ public class VanDeGraffBlockListener extends BlockListener{
 	}
 	
 	public void onBlockDamage(BlockDamageEvent event) {
-		Player player = event.getPlayer();
-		Block block = event.getBlock();
-		
-		if(block.getType() == Material.GLASS
-				&& player.getItemInHand().getType() == Material.WOOL) {
-			plugin.setCharged(true);
-		}
-		else if(plugin.isCharged()) {
-			block.getWorld().strikeLightning(block.getLocation());
-			plugin.setCharged(false);
+		if(plugin.config.getBoolean("lightning.manual", false)){
+			Player player = event.getPlayer();
+			Block block = event.getBlock();
+			
+			if(block.getType() == Material.GLASS
+					&& player.getItemInHand().getType() == Material.WOOL) {
+				plugin.setCharged(player, true);
+			}
+			else if(plugin.isCharged(player)) {
+				block.getWorld().strikeLightning(block.getLocation());
+				plugin.setCharged(player, false);
+			}
 		}
 	}
 

@@ -9,13 +9,15 @@ import org.bukkit.event.vehicle.VehicleMoveEvent;
 
 public class VanDeGraffVehicleListener extends VehicleListener{
 	private final VanDeGraffPlugin plugin;
-	
+
 	public VanDeGraffVehicleListener(final VanDeGraffPlugin plugin) {
 		this.plugin = plugin;
 	}
 	
 	public void onVehicleMove(VehicleMoveEvent event) {
-		if(event.getVehicle() instanceof Minecart ) {
+		if(plugin.config.getBoolean("lightning.carts", false)
+				&& event.getVehicle() instanceof Minecart ) {
+				
 			Block b1 = event.getFrom().getBlock(),
 				  b2 = event.getTo().getBlock();
 			
@@ -35,5 +37,4 @@ public class VanDeGraffVehicleListener extends VehicleListener{
 			}
 		}
 	}
-
 }
