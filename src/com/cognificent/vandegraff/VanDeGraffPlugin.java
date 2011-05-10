@@ -18,11 +18,13 @@ public class VanDeGraffPlugin extends JavaPlugin{
 	private final VanDeGraffBlockListener blockListener = new VanDeGraffBlockListener(this);
 	private final VanDeGraffVehicleListener vehicleListener = new VanDeGraffVehicleListener(this);
 	private final VanDeGraffEntityListener entityListener = new VanDeGraffEntityListener(this);
+	private final VanDeGraffPlayerListener playerListener = new VanDeGraffPlayerListener(this);
+	private boolean charged = false;
 	
 
 	@Override
 	public void onDisable() {
-		log.info("ThunderArrow disabled.");
+		log.info("VanDeGraff disabled.");
 	}
 
 	@Override
@@ -32,11 +34,20 @@ public class VanDeGraffPlugin extends JavaPlugin{
         pm.registerEvent(Event.Type.BLOCK_DAMAGE, blockListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.VEHICLE_MOVE, vehicleListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_ITEM_HELD, playerListener, Priority.Normal, this);
 
         // EXAMPLE: Custom code, here we just output some info so we can check all is well
         PluginDescriptionFile pdfFile = this.getDescription();
         log.info( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
 		
+	}
+
+	public void setCharged(boolean charged) {
+		this.charged = charged;
+	}
+
+	public boolean isCharged() {
+		return charged;
 	}
 
 }

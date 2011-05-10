@@ -19,7 +19,11 @@ public class VanDeGraffBlockListener extends BlockListener{
 		
 		if(block.getType() == Material.GLASS
 				&& player.getItemInHand().getType() == Material.WOOL) {
-			player.getWorld().strikeLightning(block.getLocation());
+			plugin.setCharged(true);
+		}
+		else if(plugin.isCharged()) {
+			block.getWorld().strikeLightning(block.getLocation());
+			plugin.setCharged(false);
 		}
 	}
 
