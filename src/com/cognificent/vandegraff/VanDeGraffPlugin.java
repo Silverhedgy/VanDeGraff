@@ -37,7 +37,6 @@ public class VanDeGraffPlugin extends JavaPlugin{
         pm.registerEvent(Event.Type.VEHICLE_MOVE, vehicleListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);
         pm.registerEvent(Event.Type.PLAYER_ITEM_HELD, playerListener, Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
         
         configure();
         
@@ -66,6 +65,9 @@ public class VanDeGraffPlugin extends JavaPlugin{
 	}
 
 	public boolean isCharged(Player player) {
+		if (!charged.containsKey(player)) {
+			charged.put(player, false);
+		}
 		return charged.get(player);
 	}
 
